@@ -3,11 +3,9 @@
 public class TargetMoving : MonoBehaviour
 {
     public Camera mainCamera;
-    public float speed = 5.0f;
+    public float speed = 2.5f;
 
-    private bool _isMoving;
-    private Vector3 _direction;
-    private Vector3 _target;
+    private Vector3 _target = new Vector3(0.6f,6,-0.67f);
 
     // Update is called once per frame
     private void Update()
@@ -20,22 +18,9 @@ public class TargetMoving : MonoBehaviour
             if (Physics.Raycast(ray, out _hit, Mathf.Infinity))
             {
                 _target = _hit.point;
-                _target.y += 0.5f;
-                _direction = (_target - transform.position).normalized;
-                _isMoving = true;
             }
         }
-        
-        if(!_isMoving) return;
-        
-        if (!Physics.Raycast(transform.position, Vector3.down, Mathf.Infinity) | Vector3.Distance(transform.position,_target) < 0.1f)
-        {
-            transform.position = _target;
-            _isMoving = false;
-            return;
-        }
-        
-        var move = _direction * (Time.deltaTime * speed);
-        transform.position += move;
+
+        transform.position = Vector3.Lerp(transform.position, _target, Time.deltaTime * speed);
     }
 }
