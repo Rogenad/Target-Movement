@@ -35,8 +35,7 @@ public class TargetMoving : MonoBehaviour
         
         var distPast = (Time.time - _startTime) * speed;
         var fractionOfDistance = distPast / _distance;
-
-        // Set our position as a fraction of the distance between the markers.
+        
         transform.position = Vector3.Lerp(_start, _target, fractionOfDistance);
     }
 }
