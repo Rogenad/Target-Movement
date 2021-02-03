@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Navigation Static
+  - Enemy
+  - Bullet
+  - Gun
   layers:
   - Default
   - TransparentFX

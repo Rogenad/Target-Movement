@@ -1,19 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class TargetMoving : MonoBehaviour
 {
     public Camera mainCamera;
-    public float speed = 1.0f;
-    
-    private Vector3 _start = new Vector3(0, 6, 0);
-    private Vector3 _target = new Vector3(10, 6, 0);
-    private float _distance;
-    private float _startTime;
+
+    private NavMeshAgent _navMeshAgent;
 
     private void Start()
     {
-        _distance = Vector3.Distance(_start, _target);
-        _startTime = Time.time;
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+    }
+
+    private void UpdateTarget(Vector3 targetPosition)
+    {
+        _navMeshAgent.destination = targetPosition;
     }
 
     // Update is called once per frame
@@ -26,16 +27,9 @@ public class TargetMoving : MonoBehaviour
             RaycastHit _hit;
             if (Physics.Raycast(ray, out _hit, Mathf.Infinity))
             {
-                _start = transform.position;
-                _target = _hit.point;
-                _distance = Vector3.Distance(_start, _target);
-                _startTime = Time.time;
+                Vector3 targetPosition = _hit.point;
+                UpdateTarget(targetPosition);
             }
         }
-        
-        var distPast = (Time.time - _startTime) * speed;
-        var fractionOfDistance = distPast / _distance;
-        
-        transform.position = Vector3.Lerp(_start, _target, fractionOfDistance);
     }
 }
