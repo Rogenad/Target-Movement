@@ -165,7 +165,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53356219}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 00c67b9452bd0e14cb979f45b203be0f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -723,7 +723,7 @@ GameObject:
   - component: {fileID: 190695921}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Navigation Static
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1212,7 +1212,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.223
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -2070,7 +2070,7 @@ GameObject:
   - component: {fileID: 1231209724}
   m_Layer: 0
   m_Name: Cube (3)
-  m_TagString: Navigation Static
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2535,7 +2535,7 @@ GameObject:
   - component: {fileID: 1569580304}
   m_Layer: 0
   m_Name: Cube (24)
-  m_TagString: Navigation Static
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2628,7 +2628,7 @@ GameObject:
   - component: {fileID: 1634834075}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Navigation Static
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2721,7 +2721,7 @@ GameObject:
   - component: {fileID: 1677152005}
   m_Layer: 0
   m_Name: Cube (16)
-  m_TagString: Navigation Static
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3222,7 +3222,7 @@ GameObject:
   - component: {fileID: 1977542764}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Navigation Static
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -3315,7 +3315,7 @@ GameObject:
   - component: {fileID: 1980720272}
   m_Layer: 0
   m_Name: Cube (18)
-  m_TagString: Navigation Static
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
