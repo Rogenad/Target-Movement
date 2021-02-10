@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Navigation Static
   - Enemy
-  - Bullet
   - Gun
   layers:
   - Default

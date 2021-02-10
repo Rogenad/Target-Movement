@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: ebccd0ad8dd58aa45aeba549de700ffb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - slider: {fileID: 5677631680283270311, guid: bf8a328c5caf1984cb8335942c206829,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

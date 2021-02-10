@@ -1,51 +1,37 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
-    public float fireRadius = 1000f;
-    public float fireCoolDown = 1f;
-    public GameObject bullet;
+    public float fireRadius = 10f;
+    public float fireSpeed = 50f;
+    public AnimationController animationController;
     
-    private float _lastFire;
-    private float fireSpeed = 10f;
-    private GameObject[] _enemies;
-    private GameObject _gun;
+    public GameObject gun;
+    public List<GameObject> enemies;
+    public GameObject arrowGameObject;
 
-    // Start is called before the first frame update
-    void Start()
+    public GameObject LookingForTarget()
     {
-        _enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        _gun = GameObject.FindGameObjectsWithTag("Gun")[0];
+        return enemies.FirstOrDefault(enemy => Vector3.Distance(enemy.transform.position, transform.position) <= fireRadius);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public void Shoot()
     {
-        if (_enemies[_enemies.Length - 1] == null)
+        var enemy = LookingForTarget();
+        if (enemy != null)
         {
-            Time.timeScale = 0;
-        }
-        Shoot();
-    }
+            transform.LookAt(enemy.transform);
+            var enemyPosition = enemy.transform.position;
+            var gunPosition = gun.transform.position;
 
-    // ReSharper disable Unity.PerformanceAnalysis
-    private void Shoot()
-    {
-        foreach (var enemy in _enemies)
-        {
-            if (Vector3.Distance(enemy.transform.position, transform.position) <= fireRadius && Time.time > _lastFire)
-            {
-                gameObject.transform.LookAt(enemy.transform);
-                
-                var position = _gun.transform.position;
-                GameObject b = Instantiate(bullet, position, Quaternion.identity);
-                
-                var direction = (enemy.transform.position - position).normalized;
-                Debug.Log(b.GetComponent<Rigidbody>().velocity = direction * fireSpeed);
-                b.GetComponent<Rigidbody>().velocity = direction * fireSpeed;
-                
-                _lastFire = Time.time + fireCoolDown;
-            }
+            var arrow = Instantiate(arrowGameObject, gunPosition, Quaternion.identity);
+            arrow.transform.LookAt(enemyPosition);
+            enemyPosition.y = 1;
+            gunPosition.y = 1;
+            var direction = new Vector3(enemyPosition.x - gunPosition.x, 1, enemyPosition.z - gunPosition.z).normalized;
+            arrow.GetComponent<Rigidbody>().velocity = direction * fireSpeed;
         }
     }
 }

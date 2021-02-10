@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
     
     private float speed = 5.0f;
 
-    public Vector3 cameraPosition = new Vector3(0, 0, -4);
+    public Vector3 cameraPosition = new Vector3(0, 0, -10);
 
     // Update is called once per frame
     void Update()
