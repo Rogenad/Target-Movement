@@ -1,20 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
-    public float fireRadius = 10f;
-    public float fireSpeed = 50f;
-    public AnimationController animationController;
+    [SerializeField] private float fireRadius = 50f;
+    [SerializeField] private float fireSpeed = 50f;
+    [SerializeField] private EnemySpawner enemySpawner;
+    [SerializeField] private GameObject gun;
+    [SerializeField] private GameObject arrowPrefab;
     
-    public GameObject gun;
-    public List<GameObject> enemies;
-    public GameObject arrowGameObject;
 
     public GameObject LookingForTarget()
     {
-        return enemies.FirstOrDefault(enemy => Vector3.Distance(enemy.transform.position, transform.position) <= fireRadius);
+        var enemies = enemySpawner.Enemies;
+        return enemies.FirstOrDefault(enemy => 
+            Vector3.Distance(enemy.transform.position, transform.position) <= fireRadius);
     }
 
     public void Shoot()
@@ -26,7 +26,7 @@ public class PlayerFire : MonoBehaviour
             var enemyPosition = enemy.transform.position;
             var gunPosition = gun.transform.position;
 
-            var arrow = Instantiate(arrowGameObject, gunPosition, Quaternion.identity);
+            var arrow = Instantiate(arrowPrefab, gunPosition, Quaternion.identity);
             arrow.transform.LookAt(enemyPosition);
             enemyPosition.y = 1;
             gunPosition.y = 1;

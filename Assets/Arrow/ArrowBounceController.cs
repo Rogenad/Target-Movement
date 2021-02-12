@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
 
-public class ArrowBounceController : MonoBehaviour
+namespace Arrow
 {
-    public int maxBounces;
-    private int _bounceCount;
-
-    public void AddBounce()
+    public class ArrowBounceController : MonoBehaviour
     {
-        _bounceCount++;
-    }
+        [SerializeField]
+        private int maxBounces;
+        private int _bounceCount;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(_bounceCount == maxBounces)
-            Destroy(gameObject);
-            
+        public void AddBounce()
+        {
+            _bounceCount++;
+
+            if (_bounceCount == maxBounces)
+            {
+                Destroy(gameObject);
+            }
+        }
+
     }
 }

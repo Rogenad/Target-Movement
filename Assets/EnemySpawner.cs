@@ -1,29 +1,26 @@
-﻿using Enemy;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemy;
-    public GameObject player;
-    
-    private PlayerFire _playerFire;
-    private float _spawnDelay = 5;
+    public List<GameObject> Enemies { get; } = new List<GameObject>();
+
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private float spawnDelay = 5;
+
     private float _lastSpawn;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        _playerFire = player.GetComponent<PlayerFire>();
-    }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Time.time > _lastSpawn)
         {
-            var spawnedEnemy = Instantiate(enemy);
-            _lastSpawn += _spawnDelay;
-            _playerFire.enemies.Add(spawnedEnemy);
+            var spawnedEnemy = Instantiate(enemyPrefab);
+            spawnedEnemy.SetActive(true);
+            Enemies.Add(spawnedEnemy);
+            _lastSpawn += spawnDelay;
         }
     }
+
+    
 }

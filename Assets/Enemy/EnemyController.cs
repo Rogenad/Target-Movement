@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
@@ -7,51 +6,64 @@ namespace Enemy
 {
     public class EnemyController : MonoBehaviour
     {
-        public GameObject terrain;
-        public float maxHealth;
-        public EnemyHealthBarController healthBar;
-        [NonSerialized]
-        public float currentHealth;
-        
-        private Terrain _terrain;
-        private Vector3 _minVector = new Vector3(0, 0, 0);
-        private Vector3 _maxVector;
-        private float _stopSpeed = 0.5f;
+        [SerializeField] private Terrain terrain;
+        [SerializeField] private float maxHealth;
+        [SerializeField] private float stopSpeed = 0.5f;
+        [SerializeField] private EnemySpawner enemySpawner;
+        [SerializeField] private HealthBarController healthBarController;
+        [SerializeField] private NavMeshAgent enemyAgent;
 
-        private Vector3[] path = new Vector3[3];
-        private NavMeshAgent _enemyAgent;
-        // Start is called before the first frame update
+        private GameObject _healthBar;
+        private float _currentHealth;
+        private readonly Vector3[] _path = new Vector3[3];
+        
         private  void Start()
         {
-            healthBar.SetMaxHealth(maxHealth);
-            currentHealth = maxHealth;
+            _healthBar = healthBarController.CreateHealthBar(gameObject.transform);
+            _currentHealth = maxHealth;
             
-            _terrain = terrain.GetComponent<Terrain>();
-            _enemyAgent = GetComponent<NavMeshAgent>();
-            _maxVector = _terrain.terrainData.size;
+            var terrainSize = terrain.terrainData.size;
+            var minVector = Vector3.zero;
+            float randomXPoint = 0;
+            float randomZPoint = 0;
+            
             for (int i = 0; i < 3; i++)
             {
-                path[i] = new Vector3(Random.Range(_minVector.x, _maxVector.x),
-                    0, Random.Range(_minVector.z, _maxVector.z));
+                randomXPoint = Random.Range(minVector.x, terrainSize.x);
+                randomZPoint = Random.Range(minVector.z, terrainSize.z);
+                _path[i] = new Vector3(randomXPoint, 0, randomZPoint);
             }
             
-            transform.position = new Vector3(Random.Range(_minVector.x, _maxVector.x),
-                0, Random.Range(_minVector.z, _maxVector.z));
+            transform.position = new Vector3(randomXPoint, 0, randomZPoint);
+        }
+        
+        private void Update()
+        {
+            UpdateTarget();
         }
 
         private void UpdateTarget()
         {
-            if (!_enemyAgent.hasPath && Mathf.Abs(_enemyAgent.velocity.magnitude) < _stopSpeed)
+            if (!enemyAgent.hasPath && Mathf.Abs(enemyAgent.velocity.magnitude) < stopSpeed)
             {
-                _enemyAgent.destination = path[Random.Range(0, 3)];
+                enemyAgent.destination = _path[Random.Range(0, 3)];
             }
         }
 
-        // Update is called once per frame
-        private void Update()
+        public void ReceiveDamage(int minDamage, int maxDamage)
         {
-            healthBar.UpdateHealthBar(currentHealth);
-            UpdateTarget();
+            _currentHealth -= Random.Range(minDamage, maxDamage);
+            healthBarController.UpdateHealthBar(_healthBar, maxHealth, _currentHealth);
+            
+            if (_currentHealth <= 0)
+            {
+                var aliveEnemies = enemySpawner.Enemies;
+                aliveEnemies.Remove(gameObject);
+                Destroy(_healthBar);
+                Destroy(gameObject);
+            }
         }
+
+
     }
 }

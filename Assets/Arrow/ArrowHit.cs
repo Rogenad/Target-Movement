@@ -5,17 +5,18 @@ namespace Arrow
 {
     public class ArrowHit : MonoBehaviour
     {
-        public ArrowDamage damage;
-        public ArrowBounceController bounceController;
+        [SerializeField] private int minDamage;
+        [SerializeField] private int maxDamage;
+        [SerializeField] private ArrowBounceController bounceController;
         
         private EnemyController _enemy;
-        private float _currentEnemyHealth;
+        
         private void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.CompareTag("Enemy"))
             {
                 _enemy = other.gameObject.GetComponent<EnemyController>();
-                damage.DealDamage(ref _enemy.currentHealth);
+                _enemy.ReceiveDamage(minDamage, maxDamage);
                 Destroy(gameObject);
             }
             else if (other.gameObject.CompareTag("Navigation Static"))
