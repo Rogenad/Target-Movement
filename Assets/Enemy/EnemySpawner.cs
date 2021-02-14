@@ -1,27 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+namespace Enemy
 {
-    public List<GameObject> Enemies { get; } = new List<GameObject>();
-
-    [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private TerrainRandomPointProvider pointProvider;
-    [SerializeField] private float spawnDelay = 10;
-
-    private float _lastSpawn;
-
-    // Update is called once per frame
-    private void Update()
+    public class EnemySpawner : MonoBehaviour
     {
-        if (Time.time > _lastSpawn)
+        public static EnemySpawner Instance { get; private set; }
+        public List<GameObject> Enemies { get; } = new List<GameObject>();
+
+        [SerializeField] private GameObject enemyPrefab;
+        [SerializeField] private TerrainRandomPointProvider pointProvider;
+        [SerializeField] private float spawnDelay = 10;
+
+        private float _lastSpawn;
+
+        private void Awake()
         {
-            var spawnedEnemy = Instantiate(enemyPrefab, pointProvider.GetPoint(), Quaternion.identity);
-            spawnedEnemy.SetActive(true);
-            Enemies.Add(spawnedEnemy);
-            _lastSpawn += spawnDelay;
+            Instance = this;
         }
-    }
+
+        // Update is called once per frame
+        private void Update()
+        {
+            if (Time.time > _lastSpawn)
+            {
+                var spawnedEnemy = Instantiate(enemyPrefab, pointProvider.GetPoint(), Quaternion.identity);
+                spawnedEnemy.SetActive(true);
+                Enemies.Add(spawnedEnemy);
+                _lastSpawn += spawnDelay;
+            }
+        }
 
     
+    }
 }

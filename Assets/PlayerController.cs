@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
+    public UnityEvent playerDied;
     [SerializeField] private float maxHealth;
     [SerializeField] private int maxReceivingDamage;
     [SerializeField] private int minReceivingDamage;
     [SerializeField] private HealthBarController healthBarController;
-
+    
     private GameObject _healthBar;
     private float _currentHealth;
     
@@ -21,6 +23,11 @@ public class PlayerController : MonoBehaviour
     {
         _currentHealth -= Random.Range(minReceivingDamage, maxReceivingDamage);
         healthBarController.UpdateHealthBar(_healthBar, maxHealth, _currentHealth);
+        if (_currentHealth < 0)
+        {
+            gameObject.SetActive(false);
+            playerDied.Invoke();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
