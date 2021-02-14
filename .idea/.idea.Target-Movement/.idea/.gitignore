@@ -1,0 +1,13 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/modules.xml
+/.idea.Target-Movement.iml
+/projectSettingsUpdater.xml
+# Datasource local storage ignored files
+/../../../../../../:\GitHubRep\Target-Movement\.idea\.idea.Target-Movement\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
