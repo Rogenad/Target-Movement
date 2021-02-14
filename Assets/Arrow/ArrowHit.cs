@@ -19,7 +19,7 @@ namespace Arrow
                 _enemy.ReceiveDamage(minDamage, maxDamage);
                 Destroy(gameObject);
             }
-            else if (other.gameObject.CompareTag("Navigation Static"))
+            else if (other.gameObject.CompareTag("Navigation Static") || other.gameObject.CompareTag("Arrow"))
                 bounceController.AddBounce();
             else Destroy(gameObject);
         }

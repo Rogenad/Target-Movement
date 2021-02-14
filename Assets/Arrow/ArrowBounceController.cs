@@ -4,8 +4,7 @@ namespace Arrow
 {
     public class ArrowBounceController : MonoBehaviour
     {
-        [SerializeField]
-        private int maxBounces;
+        [SerializeField] private int maxBounces;
         private int _bounceCount;
 
         public void AddBounce()

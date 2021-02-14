@@ -6,8 +6,7 @@ TagManager:
   tags:
   - Navigation Static
   - Enemy
-  - Gun
-  - HealthBarFill
+  - Arrow
   layers:
   - Default
   - TransparentFX

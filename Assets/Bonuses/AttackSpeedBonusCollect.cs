@@ -4,11 +4,10 @@ namespace Bonuses
 {
     public class AttackSpeedBonusCollect : MonoBehaviour
     {
-        [SerializeField] 
-        private Animator attackSpeedController;
+        private static readonly int ShotSpeed = Animator.StringToHash("shotSpeed");
+        [SerializeField] private Animator attackSpeedController;
 
         private float _shootingAnimationTime;
-        private static readonly int ShotSpeed = Animator.StringToHash("shotSpeed");
 
         private void OnTriggerEnter(Collider other)
         {

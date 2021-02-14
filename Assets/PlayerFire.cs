@@ -25,11 +25,8 @@ public class PlayerFire : MonoBehaviour
             transform.LookAt(enemy.transform);
             var enemyPosition = enemy.transform.position;
             var gunPosition = gun.transform.position;
-
             var arrow = Instantiate(arrowPrefab, gunPosition, Quaternion.identity);
-            arrow.transform.LookAt(enemyPosition);
-            enemyPosition.y = 1;
-            gunPosition.y = 1;
+            arrow.transform.LookAt(enemy.transform);
             var direction = new Vector3(enemyPosition.x - gunPosition.x, 1, enemyPosition.z - gunPosition.z).normalized;
             arrow.GetComponent<Rigidbody>().velocity = direction * fireSpeed;
         }

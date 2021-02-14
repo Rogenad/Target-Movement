@@ -2,14 +2,14 @@
 
 public class HealthBar : MonoBehaviour
 {
-    private Camera _currentCamera;
+    private Camera _mainCamera;
     private RectTransform _healthBarPosition;
     private Transform _healthBarOwner;
     private RectTransform _targetCanvas;
 
     private void Awake()
     {
-        _currentCamera = Camera.main;
+        _mainCamera = Camera.main;
     }
 
     private void Update()
@@ -21,7 +21,7 @@ public class HealthBar : MonoBehaviour
     {
         var canvasSizeDelta = _targetCanvas.sizeDelta;
         
-        Vector2 viewportPosition = _currentCamera.WorldToViewportPoint(_healthBarOwner.position);
+        Vector2 viewportPosition = _mainCamera.WorldToViewportPoint(_healthBarOwner.position);
         var worldObjectScreenPosition = new Vector2(
             ((viewportPosition.x * canvasSizeDelta.x) - (canvasSizeDelta.x * 0.5f)),
             ((viewportPosition.y * canvasSizeDelta.y) - (canvasSizeDelta.y * 0.5f)));
