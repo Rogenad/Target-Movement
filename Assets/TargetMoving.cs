@@ -21,7 +21,7 @@ public class TargetMoving : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButton(1))
         {
             var ray = mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
             if (Physics.Raycast(ray, out var hit, Mathf.Infinity))

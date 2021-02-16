@@ -8,25 +8,25 @@ namespace Enemy
     public class EnemyController : MonoBehaviour
     {
         public UnityEvent enemyKilled;
-        private readonly Vector3[] _path = new Vector3[3];
+        public int MaxDamage { get; } = 10;
+        public int MinDamage { get; } = 5;
         
-        [SerializeField] private TerrainRandomPointProvider pointProvider;
-        [SerializeField] private float maxHealth;
-        [SerializeField] private EnemySpawner enemySpawner;
+        private readonly Vector3[] _path = new Vector3[3];
         [SerializeField] private HealthBarController healthBarController;
+        [SerializeField] private int maxHealth;
         [SerializeField] private NavMeshAgent enemyAgent;
         
         private GameObject _healthBar;
-        private float _currentHealth;
-        
-        private  void Start()
+        private int _currentHealth;
+
+        private void Start()
         {
             _healthBar = healthBarController.CreateHealthBar(gameObject.transform);
             _currentHealth = maxHealth;
             
             for (var i = 0; i < 3; i++)
             {
-                _path[i] = pointProvider.GetPoint();
+                _path[i] = TerrainRandomPointProvider.Instance.GetPoint();
             }
         }
         
@@ -46,11 +46,11 @@ namespace Enemy
         public void ReceiveDamage(int minDamage, int maxDamage)
         {
             _currentHealth -= Random.Range(minDamage, maxDamage);
-            healthBarController.UpdateHealthBar(_healthBar, maxHealth, _currentHealth);
+            HealthBarController.UpdateHealthBar(_healthBar, _currentHealth, maxHealth);
             if (_currentHealth <= 0)
             {
                 enemyKilled.Invoke();
-                var aliveEnemies = enemySpawner.Enemies;
+                var aliveEnemies = EnemySpawner.Instance.Enemies;
                 aliveEnemies.Remove(gameObject);
                 Destroy(_healthBar);
                 Destroy(gameObject);

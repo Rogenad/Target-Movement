@@ -6,14 +6,13 @@ public class PlayerFire : MonoBehaviour
 {
     [SerializeField] private float fireRadius = 50f;
     [SerializeField] private float fireSpeed = 50f;
-    [SerializeField] private EnemySpawner enemySpawner;
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject arrowPrefab;
     
 
     public GameObject LookingForTarget()
     {
-        var enemies = enemySpawner.Enemies;
+        var enemies = EnemySpawner.Instance.Enemies;
         return enemies.FirstOrDefault(enemy => 
             Vector3.Distance(enemy.transform.position, transform.position) <= fireRadius);
     }

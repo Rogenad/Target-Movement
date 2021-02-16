@@ -1,29 +1,43 @@
-﻿using UnityEngine;
+﻿using Enemy;
+using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance { get; private set; }
+    public int MaxDamage { get; set; } = 20;
+    public int MinDamage { get; set; } = 10;
+    public int CurrentHealth
+    { 
+        get => _currentHealth;
+        set
+        {
+            _currentHealth = value;
+            if (_currentHealth > maxHealth)
+            {
+                _currentHealth = maxHealth;
+            }
+            healthBar.transform.localScale = ProgressBar.SetProgress(_currentHealth, maxHealth);
+        }
+    }
+    
     public UnityEvent playerDied;
-    [SerializeField] private float maxHealth;
-    [SerializeField] private int maxReceivingDamage;
-    [SerializeField] private int minReceivingDamage;
-    [SerializeField] private HealthBarController healthBarController;
+    [SerializeField] private GameObject healthBar;
+    [SerializeField] private int maxHealth;
     
-    private GameObject _healthBar;
-    private float _currentHealth;
-    
+    private int _currentHealth;
+
     private void Start()
     {
-        _healthBar = healthBarController.CreateHealthBar(gameObject.transform);
+        Instance = this;
         _currentHealth = maxHealth;
     }
 
-    private void ReceiveDamage()
+    private void ReceiveDamage(int minReceivingDamage, int maxReceivingDamage)
     {
-        _currentHealth -= Random.Range(minReceivingDamage, maxReceivingDamage);
-        healthBarController.UpdateHealthBar(_healthBar, maxHealth, _currentHealth);
-        if (_currentHealth < 0)
+        CurrentHealth -= Random.Range(minReceivingDamage, maxReceivingDamage);
+        if (CurrentHealth < 0)
         {
             gameObject.SetActive(false);
             playerDied.Invoke();
@@ -34,7 +48,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            ReceiveDamage();
+            var enemy = other.GetComponent<EnemyController>();
+            ReceiveDamage(enemy.MinDamage, enemy.MaxDamage);
         }
     }
 }

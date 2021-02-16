@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Enemy
@@ -10,7 +9,6 @@ namespace Enemy
         public List<GameObject> Enemies { get; } = new List<GameObject>();
 
         [SerializeField] private GameObject enemyPrefab;
-        [SerializeField] private TerrainRandomPointProvider pointProvider;
         [SerializeField] private float spawnDelay = 10;
 
         private float _lastSpawn;
@@ -25,7 +23,8 @@ namespace Enemy
         {
             if (Time.time > _lastSpawn)
             {
-                var spawnedEnemy = Instantiate(enemyPrefab, pointProvider.GetPoint(), Quaternion.identity);
+                var spawnPoint = TerrainRandomPointProvider.Instance.GetPoint();
+                var spawnedEnemy = Instantiate(enemyPrefab, spawnPoint, Quaternion.identity);
                 spawnedEnemy.SetActive(true);
                 Enemies.Add(spawnedEnemy);
                 _lastSpawn += spawnDelay;
