@@ -4,14 +4,15 @@ namespace Arrow
 {
     public class ArrowBounceController : MonoBehaviour
     {
-        [SerializeField] private int maxBounces;
+        [SerializeField] 
+        private int _maxBounces;
         private int _bounceCount;
 
         public void AddBounce()
         {
             _bounceCount++;
 
-            if (_bounceCount == maxBounces)
+            if (_bounceCount == _maxBounces)
             {
                 Destroy(gameObject);
             }
