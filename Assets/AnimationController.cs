@@ -5,13 +5,14 @@ public class AnimationController : MonoBehaviour
 {
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
     private static readonly int IsShooting = Animator.StringToHash("isShooting");
-
-    [SerializeField] private PlayerFire playerFire;
-    [SerializeField] private float stopSpeed = 0.5f;
-    [SerializeField] private Animator animator;
-    [SerializeField] private NavMeshAgent agent;
-
-    // Update is called once per frame
+    
+    [SerializeField]
+    private PlayerFire _playerFire;
+    [SerializeField]
+    private Animator _animator;
+    [SerializeField]
+    private NavMeshAgent _agent;
+    
     private void Update()
     {
         MoveAnimation();
@@ -20,14 +21,15 @@ public class AnimationController : MonoBehaviour
     
     private void MoveAnimation()
     {
-        animator.SetBool(IsRunning, Mathf.Abs(agent.velocity.magnitude) > stopSpeed);
+        var distanceToTarget = Vector3.Distance(_agent.transform.position, _agent.destination);
+        _animator.SetBool(IsRunning, distanceToTarget > _agent.stoppingDistance);
     }
 
     private void ShotAnimation()
     {
-        if (!animator.GetBool(IsRunning) && playerFire.LookingForTarget() != null)
+        if (!_animator.GetBool(IsRunning) && _playerFire.LookingForTarget() != null)
         {
-            animator.SetTrigger(IsShooting);
+            _animator.SetTrigger(IsShooting);
         }
     }
 

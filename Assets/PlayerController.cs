@@ -5,6 +5,14 @@ using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField]
+    UnityEvent _OnPlayerDeath;
+    [SerializeField]
+    private GameObject _healthBar;
+    [SerializeField]
+    private int _maxHealth;
+    private int _currentHealth;
+    
     public static PlayerController Instance { get; private set; }
     public int MaxDamage { get; set; } = 20;
     public int MinDamage { get; set; } = 10;
@@ -14,24 +22,18 @@ public class PlayerController : MonoBehaviour
         set
         {
             _currentHealth = value;
-            if (_currentHealth > maxHealth)
+            if (_currentHealth > _maxHealth)
             {
-                _currentHealth = maxHealth;
+                _currentHealth = _maxHealth;
             }
-            healthBar.transform.localScale = ProgressBar.SetProgress(_currentHealth, maxHealth);
+            _healthBar.transform.localScale = ProgressBar.SetProgress(_currentHealth, _maxHealth);
         }
     }
-    
-    public UnityEvent playerDied;
-    [SerializeField] private GameObject healthBar;
-    [SerializeField] private int maxHealth;
-    
-    private int _currentHealth;
 
     private void Start()
     {
         Instance = this;
-        _currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
     }
 
     private void ReceiveDamage(int minReceivingDamage, int maxReceivingDamage)
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
         if (CurrentHealth < 0)
         {
             gameObject.SetActive(false);
-            playerDied.Invoke();
+            _OnPlayerDeath.Invoke();
         }
     }
 

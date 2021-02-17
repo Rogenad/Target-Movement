@@ -5,7 +5,8 @@ namespace Arrow
 {
     public class ArrowHit : MonoBehaviour
     {
-        [SerializeField] private ArrowBounceController bounceController;
+        [SerializeField] 
+        private ArrowBounceController _bounceController;
         private EnemyController _enemy;
         
         private void OnCollisionEnter(Collision other)
@@ -18,7 +19,7 @@ namespace Arrow
                 Destroy(gameObject);
             }
             else if (other.gameObject.CompareTag("Navigation Static") || other.gameObject.CompareTag("Arrow"))
-                bounceController.AddBounce();
+                _bounceController.AddBounce();
             else Destroy(gameObject);
         }
     }
