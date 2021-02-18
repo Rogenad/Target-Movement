@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Bonuses
 {
@@ -10,9 +11,13 @@ namespace Bonuses
         [SerializeField] 
         private Sprite _bonusIcon;
 
+        private void Awake()
+        {
+            BonusList.Add(this);
+        }
+
         public override void BonusPayLoad()
         {
-            base.BonusPayLoad();
             Debug.Log("AttackSpeed");
             var currentAttackSpeedMultiplier = _attackSpeedController.GetFloat(AttackSpeedMultiplier);
             _attackSpeedController.SetFloat(AttackSpeedMultiplier, currentAttackSpeedMultiplier + 1);
@@ -20,7 +25,6 @@ namespace Bonuses
 
         public override Sprite SetBonusIcon()
         {
-            base.SetBonusIcon();
             return _bonusIcon;
         }
     }
