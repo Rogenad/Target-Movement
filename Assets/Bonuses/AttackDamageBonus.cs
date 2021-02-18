@@ -4,19 +4,21 @@ namespace Bonuses
 {
     public class AttackDamageBonus : Bonus
     {
-        [SerializeField] private int amountOfDamageToAdd;
-        [SerializeField] private Sprite bonusIcon;
+        [SerializeField] 
+        private int _amountOfDamageToAdd;
+        [SerializeField] 
+        private Sprite _bonusIcon;
         public override void BonusPayLoad()
         {
             base.BonusPayLoad();
-            Debug.Log("AttackDamage");
-            Player.MaxDamage += amountOfDamageToAdd;
-            Player.MinDamage += amountOfDamageToAdd;
+            Debug.Log("AttackDamage"); 
+            _player.MaxDamage += _amountOfDamageToAdd;
+            _player.MinDamage += _amountOfDamageToAdd;
         }
         public override Sprite SetBonusIcon()
         {
             base.SetBonusIcon();
-            return bonusIcon;
+            return _bonusIcon;
         }
     }
 }

@@ -4,18 +4,20 @@ namespace Bonuses
 {
     public class HealthRestoreBonus : Bonus
     {
-        [SerializeField] private int amountHealthOfToRestore;
-        [SerializeField] private Sprite bonusIcon;
+        [SerializeField] 
+        private int _amountHealthOfToRestore;
+        [SerializeField] 
+        private Sprite _bonusIcon;
         public override void BonusPayLoad()
         {
             base.BonusPayLoad();
             Debug.Log("HealthRestore");
-            Player.CurrentHealth += amountHealthOfToRestore;
+            _player.CurrentHealth += _amountHealthOfToRestore;
         }
         public override Sprite SetBonusIcon()
         {
             base.SetBonusIcon();
-            return bonusIcon;
+            return _bonusIcon;
         }
     }
 }

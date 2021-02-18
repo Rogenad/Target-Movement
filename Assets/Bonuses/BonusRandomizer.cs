@@ -7,16 +7,18 @@ namespace Bonuses
 {
     public class BonusRandomizer : MonoBehaviour
     {
-        [SerializeField] private List<Bonus> bonuses = new List<Bonus>();
-        [SerializeField] private List<Button> buttons = new List<Button>();
+        [SerializeField] 
+        private List<Bonus> _bonuses = new List<Bonus>();
+        [SerializeField] 
+        private List<Button> _buttons = new List<Button>();
 
         public void GetRandomBonuses()
         {
             for (var i = 0; i < 3; i++)
             {
-                var randomBonus = bonuses[Random.Range(0, bonuses.Count)];
-                buttons[i].onClick.AddListener(randomBonus.BonusPayLoad);
-                buttons[i].gameObject.GetComponentInChildren<Image>().sprite = randomBonus.SetBonusIcon();
+                var randomBonus = _bonuses[Random.Range(0, _bonuses.Count)];
+                _buttons[i].onClick.AddListener(randomBonus.BonusPayLoad);
+                _buttons[i].gameObject.GetComponentInChildren<Image>().sprite = randomBonus.SetBonusIcon();
             }
         }
     }

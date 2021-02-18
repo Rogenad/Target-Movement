@@ -4,11 +4,11 @@ namespace Bonuses
 {
     public class Bonus : MonoBehaviour
     {
-        protected PlayerController Player;
+        protected PlayerController _player;
 
         public virtual void BonusPayLoad()
         {
-            Player = PlayerController.Instance;
+            _player = PlayerController.Instance;
         }
 
         public virtual Sprite SetBonusIcon()
