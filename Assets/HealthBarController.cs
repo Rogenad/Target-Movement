@@ -17,8 +17,10 @@ public class HealthBarController : MonoBehaviour
 
     public static void UpdateHealthBar(GameObject healthBar, int currentHealth, int maxHealth)
     {
-        var fillImage = healthBar.GetComponentsInChildren<Image>()[1];
-        fillImage.transform.localScale = ProgressBar.SetProgress(currentHealth, maxHealth);
+        var barImage = healthBar.GetComponentsInChildren<Image>()[1];
+        ProgressBar.SetProgress(out var barImageScale, currentHealth, maxHealth);
+        barImage.transform.localScale = barImageScale;
+
     }
 
 }
