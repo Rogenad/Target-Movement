@@ -3,20 +3,24 @@ using UnityEngine.UI;
 
 public class HealthBarController : MonoBehaviour
 {
-    [SerializeField] private GameObject healthBarPrefab;
-    [SerializeField] private RectTransform healthBarPanel;
+    [SerializeField] 
+    private GameObject _healthBarPrefab;
+    [SerializeField] 
+    private RectTransform _healthBarPanel;
 
     public GameObject CreateHealthBar(Transform healthBarOwner)
     {
-        var createdHealthBar = Instantiate(healthBarPrefab, healthBarPanel);
-        createdHealthBar.GetComponent<HealthBar>().SetHealthBarData(healthBarOwner, healthBarPanel);
+        var createdHealthBar = Instantiate(_healthBarPrefab, _healthBarPanel);
+        createdHealthBar.GetComponent<HealthBar>().SetHealthBarData(healthBarOwner, _healthBarPanel);
         return createdHealthBar;
     }
 
     public static void UpdateHealthBar(GameObject healthBar, int currentHealth, int maxHealth)
     {
-        var fillImage = healthBar.GetComponentsInChildren<Image>()[1];
-        fillImage.transform.localScale = ProgressBar.SetProgress(currentHealth, maxHealth);
+        var barImage = healthBar.GetComponentsInChildren<Image>()[1];
+        ProgressBar.SetProgress(out var barImageScale, currentHealth, maxHealth);
+        barImage.transform.localScale = barImageScale;
+
     }
 
 }

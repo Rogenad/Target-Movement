@@ -14,11 +14,8 @@ public class PlayerController : MonoBehaviour
         set
         {
             _currentHealth = value;
-            if (_currentHealth > maxHealth)
-            {
-                _currentHealth = maxHealth;
-            }
-            healthBar.transform.localScale = ProgressBar.SetProgress(_currentHealth, maxHealth);
+            ProgressBar.SetProgress(out var healthBarFill, _currentHealth, maxHealth);
+            healthBar.transform.localScale = healthBarFill;
         }
     }
     

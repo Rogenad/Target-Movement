@@ -3,7 +3,8 @@ using UnityEngine.AI;
 
 public class TargetMoving : MonoBehaviour
 {
-    [SerializeField] private Camera mainCamera;
+    [SerializeField]
+    private Camera _mainCamera;
 
     private NavMeshAgent _navMeshAgent;
     private Vector3 _targetPosition;
@@ -23,7 +24,7 @@ public class TargetMoving : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            var ray = mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
+            var ray = _mainCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
             if (Physics.Raycast(ray, out var hit, Mathf.Infinity))
             {
                 _targetPosition = hit.point;

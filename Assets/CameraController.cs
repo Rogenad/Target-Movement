@@ -2,15 +2,16 @@
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject target;
-    
-    private float speed = 5.0f;
-
-    public Vector3 cameraPosition = new Vector3(0, 0, -10);
+    [SerializeField]
+    private GameObject _target;
+    [SerializeField]
+    private float _speed = 5.0f;
+    [SerializeField]
+    private Vector3 _cameraPosition = new Vector3(0, 0, -10);
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, target.transform.position + cameraPosition, Time.deltaTime * speed);
+        transform.position = Vector3.Lerp(transform.position, _target.transform.position + _cameraPosition, Time.deltaTime * _speed);
     }
 }
