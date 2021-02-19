@@ -8,6 +8,12 @@ namespace Bonuses
         private int _amountOfDamageToAdd;
         [SerializeField] 
         private Sprite _bonusIcon;
+        
+        private void Awake()
+        {
+            BonusList.Add(this);
+        }
+        
         public override void BonusPayLoad()
         {
             base.BonusPayLoad();
@@ -15,6 +21,7 @@ namespace Bonuses
             _player.MaxDamage += _amountOfDamageToAdd;
             _player.MinDamage += _amountOfDamageToAdd;
         }
+        
         public override Sprite SetBonusIcon()
         {
             base.SetBonusIcon();

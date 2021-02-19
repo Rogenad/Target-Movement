@@ -3707,7 +3707,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRadius: 50
   fireSpeed: 50
-  enemySpawner: {fileID: 1791999822}
   gun: {fileID: 346255206}
   arrowPrefab: {fileID: 1250374000}
 --- !u!195 &919819455
@@ -3821,7 +3820,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDied:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1831578790780993}
+        m_MethodName: ShowLoseMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   healthBar: {fileID: 990002738}
   maxHealth: 150
 --- !u!54 &919819462
@@ -6164,8 +6174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36699a605102cb74988f5e6ad2884a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountHealthOfToRestore: 10
-  bonusIcon: {fileID: 21300000, guid: 5de2f784c38071e49bf0d05905d43156, type: 3}
+  _amountHealthOfToRestore: 25
+  _bonusIcon: {fileID: 21300000, guid: 5de2f784c38071e49bf0d05905d43156, type: 3}
 --- !u!114 &1511142689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6178,8 +6188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6033451bd8f58a84cb37669bd6507d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeedController: {fileID: 919819457}
-  bonusIcon: {fileID: 21300000, guid: 0d662265b6cd24d40baf63e681764176, type: 3}
+  _attackSpeedController: {fileID: 919819457}
+  _bonusIcon: {fileID: 21300000, guid: 0d662265b6cd24d40baf63e681764176, type: 3}
 --- !u!114 &1511142690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6192,8 +6202,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47844afe8c7e91e4fa1163bb78809196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfDamageToAdd: 10
-  bonusIcon: {fileID: 21300000, guid: d026ca97a03095d418edd82eaf8a4bb4, type: 3}
+  _amountOfDamageToAdd: 15
+  _bonusIcon: {fileID: 21300000, guid: d026ca97a03095d418edd82eaf8a4bb4, type: 3}
 --- !u!114 &1511142691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6206,11 +6216,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b3fc7223f1d835429be08c992f8b1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonuses:
+  _bonuses:
   - {fileID: 1511142690}
   - {fileID: 1511142689}
   - {fileID: 1511142688}
-  buttons:
+  _buttons:
   - {fileID: 115856916}
   - {fileID: 767407528}
   - {fileID: 1494981155}
@@ -7715,7 +7725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 506132532}
-  spawnDelay: 5
+  spawnDelay: 10
 --- !u!154 &1791999823
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -9952,7 +9962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 280af3ea40e664247a0bb1a1d3b0b858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killedEnemiesCounter: {fileID: 0}
+  killedEnemiesCounter: {fileID: 298025592}
 --- !u!224 &224255975048689584 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2979146127998959625, guid: 41036730114eae44791b5ee3ace62178,
