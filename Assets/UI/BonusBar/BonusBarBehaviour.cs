@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI
+namespace UI.BonusBar
 {
     public class BonusBarBehaviour : MonoBehaviour
     {
+        [SerializeField]
+        private List<Button> _buttons = new List<Button>();
         public void ShowBonusBar()
         {
             UIManager.ShowMenu(gameObject);
@@ -12,8 +15,7 @@ namespace UI
 
         public void CloseBonusBar()
         {
-            var buttons = gameObject.GetComponentsInChildren<Button>();
-            foreach (var button in buttons)
+            foreach (var button in _buttons)
             {
                 button.onClick.RemoveAllListeners();
             }
