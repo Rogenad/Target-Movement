@@ -18,11 +18,11 @@ namespace Bonuses
         private void GetRandomBonuses()
         {
             var bonuses = Bonus.BonusList;
-            for (var i = 0; i < 3; i++)
+            foreach (var button in _buttons)
             {
                 var randomBonus = bonuses[Random.Range(0, bonuses.Count)];
-                _buttons[i].onClick.AddListener(randomBonus.BonusPayLoad);
-                _buttons[i].gameObject.GetComponentInChildren<Image>().sprite = randomBonus.SetBonusIcon();
+                button.onClick.AddListener(randomBonus.ApplyBonus);
+                button.GetComponentInChildren<BonusButton>().BonusIcon = randomBonus.SetBonusIcon();
             }
         }
     }

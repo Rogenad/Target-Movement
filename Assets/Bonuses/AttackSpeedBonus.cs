@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Bonuses
 {
@@ -16,9 +15,9 @@ namespace Bonuses
             BonusList.Add(this);
         }
 
-        public override void BonusPayLoad()
+        public override void ApplyBonus()
         {
-            Debug.Log("AttackSpeed");
+            base.ApplyBonus();
             var currentAttackSpeedMultiplier = _attackSpeedController.GetFloat(AttackSpeedMultiplier);
             _attackSpeedController.SetFloat(AttackSpeedMultiplier, currentAttackSpeedMultiplier + 1);
         }

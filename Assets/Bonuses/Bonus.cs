@@ -1,21 +1,20 @@
 ﻿using System.Collections.Generic;
+using Player;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Bonuses
 {
-    public class Bonus : MonoBehaviour
+    public abstract class Bonus : MonoBehaviour
     {
-        protected PlayerController _player;
+        protected PlayerController Player;
         public static List<Bonus> BonusList { get; } = new List<Bonus>();
 
-        public virtual void BonusPayLoad()
+        public virtual void ApplyBonus()
         {
-            _player = PlayerController.Instance;
+            Player = PlayerController.Instance;
         }
 
-        public virtual Sprite SetBonusIcon()
-        {
-            return null;
-        }
+        public abstract Sprite SetBonusIcon();
     }
 }

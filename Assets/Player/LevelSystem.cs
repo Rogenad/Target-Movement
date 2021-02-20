@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -8,7 +7,7 @@ namespace Player
     public class LevelSystem : MonoBehaviour
     {
         [SerializeField]
-        public UnityEvent _onLevelUp;
+        private UnityEvent _onLevelUp;
         [SerializeField]
         private Image _experienceBar;
         [SerializeField]

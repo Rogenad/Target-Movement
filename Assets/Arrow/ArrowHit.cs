@@ -1,4 +1,5 @@
 ﻿using Enemy;
+using Player;
 using UnityEngine;
 
 namespace Arrow

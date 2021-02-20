@@ -14,17 +14,15 @@ namespace Bonuses
             BonusList.Add(this);
         }
         
-        public override void BonusPayLoad()
+        public override void ApplyBonus()
         {
-            base.BonusPayLoad();
-            Debug.Log("AttackDamage"); 
-            _player.MaxDamage += _amountOfDamageToAdd;
-            _player.MinDamage += _amountOfDamageToAdd;
+            base.ApplyBonus();
+            Player.MaxDamage += _amountOfDamageToAdd;
+            Player.MinDamage += _amountOfDamageToAdd;
         }
         
         public override Sprite SetBonusIcon()
         {
-            base.SetBonusIcon();
             return _bonusIcon;
         }
     }
