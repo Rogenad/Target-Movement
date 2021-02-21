@@ -16,6 +16,7 @@ namespace Bonuses
         
         public override void ApplyBonus()
         {
+            base.ApplyBonus();
             Player.CurrentHealth += _amountHealthToRestore;
         }
         

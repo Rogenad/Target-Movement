@@ -17,7 +17,6 @@ namespace Bonuses
 
         public override void ApplyBonus()
         {
-            base.ApplyBonus();
             var currentAttackSpeedMultiplier = _attackSpeedController.GetFloat(AttackSpeedMultiplier);
             _attackSpeedController.SetFloat(AttackSpeedMultiplier, currentAttackSpeedMultiplier + 1);
         }
